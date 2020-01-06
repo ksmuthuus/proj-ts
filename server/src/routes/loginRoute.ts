@@ -7,7 +7,7 @@ const loginRouter = Router();
 
 loginRouter.get("/", (req: Request, res: Response) => {
   if (req.session && req.session.loggedIn) {
-    res.send(`<h1>Logged In</h1>`);
+    res.send(`<h1>Logged In</h1> <h3><a href='/logout'>Logout</a></h3>`);
   } else {
     res.send(`<h3>please Sign-In</h3><a href='/login'>SignIn</a>`);
   }
@@ -39,6 +39,19 @@ loginRouter.post("/login", (req: Request, res: Response) => {
   } else {
     res.send("Invalid user name");
   }
+});
+
+loginRouter.get("/secured", (req: Request, res: Response) => {
+  if (req.session && req.session.loggedIn) {
+    res.send(`<h1>Protected resource is here...</h1>`);
+  } else {
+    res.send(`<h3>please Sign-In</h3><a href='/login'>SignIn</a>`);
+  }
+});
+
+loginRouter.get("/logout", (req: Request, res: Response) => {
+  req.session = undefined;
+  res.redirect("/");
 });
 
 export { loginRouter };

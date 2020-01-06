@@ -5,7 +5,7 @@ var loginRouter = express_1.Router();
 exports.loginRouter = loginRouter;
 loginRouter.get("/", function (req, res) {
     if (req.session && req.session.loggedIn) {
-        res.send("<h1>Logged In</h1>");
+        res.send("<h1>Logged In</h1> <h3><a href='/logout'>Logout</a></h3>");
     }
     else {
         res.send("<h3>please Sign-In</h3><a href='/login'>SignIn</a>");
@@ -23,4 +23,16 @@ loginRouter.post("/login", function (req, res) {
     else {
         res.send("Invalid user name");
     }
+});
+loginRouter.get("/secured", function (req, res) {
+    if (req.session && req.session.loggedIn) {
+        res.send("<h1>Protected resource is here...</h1>");
+    }
+    else {
+        res.send("<h3>please Sign-In</h3><a href='/login'>SignIn</a>");
+    }
+});
+loginRouter.get("/logout", function (req, res) {
+    req.session = undefined;
+    res.redirect("/");
 });
