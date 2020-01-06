@@ -1,9 +1,11 @@
 import { Router, Request, Response } from "express";
+import { AppRouter } from "../AppRouter";
+
 interface RequestWithBody extends Request {
   body: { [key: string]: string | undefined };
 }
 
-const loginRouter = Router();
+const loginRouter = AppRouter.getInstance();
 
 loginRouter.get("/", (req: Request, res: Response) => {
   if (req.session && req.session.loggedIn) {

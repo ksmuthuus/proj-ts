@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var loginRouter = express_1.Router();
+var AppRouter_1 = require("../AppRouter");
+var loginRouter = AppRouter_1.AppRouter.getInstance();
 exports.loginRouter = loginRouter;
 loginRouter.get("/", function (req, res) {
     if (req.session && req.session.loggedIn) {
